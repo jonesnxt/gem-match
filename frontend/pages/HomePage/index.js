@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { ThemeProvider, keyframes } from 'styled-components';
-import GlobalContext from 'GlobalContext';
+import GlobalContext from '../../common/GlobalContext';
 import { Helmet } from 'react-helmet';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 
@@ -100,6 +100,7 @@ const Start = styled.button`
     border-radius: 1000px;
     margin-bottom: 10vh;
     animation: ${Animation} 2s ease-in-out infinite;
+    font-family: '${({ theme }) => getFontFamily(theme.general.fontFamily)}', sans-serif;
 
     transition: background-color 0.1s ease-in-out;
 

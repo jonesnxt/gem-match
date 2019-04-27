@@ -21,6 +21,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 
 const kojiProjectConfig = require('../../.koji/scripts/buildConfig.js')();
 const kojiManifest = require('../../.koji/scripts/buildManifest.js')();
@@ -143,6 +144,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: './common/index.html',
+    }),
+    new ExtraWatchWebpackPlugin({
+      dirs: [ '../.koji' ],
     }),
     new WorkboxPlugin.GenerateSW(),
   ]

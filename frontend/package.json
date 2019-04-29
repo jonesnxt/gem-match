@@ -5,18 +5,23 @@
   "author": "username",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./.internals/webpack.production.js --color -p --progress --hide-modules --display-optimization-bailout",
-    "start": "webpack-dev-server --config ./.internals/webpack.development.js --hot"
+    "start": "webpack-dev-server --config ./.internals/webpack.development.js"
   },
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+<<<<<<< HEAD
     "react-helmet": "^5.2.0",
     "react-icons": "^3.6.1",
+=======
+    "react-router-dom": "^5.0.0",
+>>>>>>> c9a25da46355ac83d2e6ea6ccc5d033c99a54054
     "styled-components": "^4.2.0",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "babel": "^6.23.0",

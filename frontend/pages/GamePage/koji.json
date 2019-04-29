@@ -2,6 +2,6 @@
 	"pages": [{
 		"name": "Game",
         "route": "/",
-        "path": "frontend/pages/HomePage"
+        "path": "frontend/pages/GamePage"
 	}]
 }

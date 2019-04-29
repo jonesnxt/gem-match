@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import GlobalContext from '../../../common/GlobalContext';
+import GlobalContext from 'GlobalContext';
 
 import Piece from './Piece';
 import Effect from './Effect';

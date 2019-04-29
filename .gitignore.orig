@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+.idea/
+.vscode/
+node_modules/
+.remy/
+build
+.DS_Store
+*.tgz
+my-app*
+template/src/__tests__/__snapshots__/
+lerna-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.changelog
+.npm/
+=======
+build
+.DS_Store
+npm-debug.log
+node_modules/
+.remy
+Dockerfile
+>>>>>>> 4908f220c88393d2a2a16dd3b16bc958ba27b4d5

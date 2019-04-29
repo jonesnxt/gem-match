@@ -21,9 +21,16 @@
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.3.1",
     "babel-plugin-dynamic-import-node": "1.2.0",
+<<<<<<< HEAD
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-stage-0": "6.24.1",
+    "babel-watch": "git+https://github.com/kmagiera/babel-watch.git"
+=======
     "babel-preset-env": "1.7.0",
     "babel-preset-stage-0": "6.24.1",
     "babel-watch": "git+https://github.com/kmagiera/babel-watch.git",
     "babel-plugin-transform-object-rest-spread": "6.26.0"
+>>>>>>> 4908f220c88393d2a2a16dd3b16bc958ba27b4d5
   }
 }

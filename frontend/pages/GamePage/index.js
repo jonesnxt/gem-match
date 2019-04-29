@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { ThemeProvider, keyframes } from 'styled-components';
-import GlobalContext from 'GlobalContext';
 import { Helmet } from 'react-helmet';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
+import GlobalContext from 'common/GlobalContext';
 
 import Game from './components/Game';
 

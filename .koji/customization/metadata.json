@@ -4,6 +4,8 @@
     "description": "An easily extendable matching game. Customize it to be whatever you want with Koji.",
     "image": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc9v7iu-3677d383-767e-48e7-b3cc-6f1b7f8ad609.png",
     "icon": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/0283d382-0feb-4d6b-86f6-69ec2817d857/dc2fouk-ed449fbb-8fd5-49d9-9ea3-e445fea08148.png/v1/fill/w_894,h_894,strp/bejeweled_orange_gem_by_ldinos_dc2fouk-pre.png",
+    "icon192": "https://via.placeholder.com/192",
+    "icon512": "https://via.placeholder.com/512",
     "gaCode": ""
   },
   "@@editor": [
@@ -41,9 +43,21 @@
         },
         {
           "key": "icon",
-          "name": "Icon",
+          "name": "Icon 32 x 32",
           "type": "image",
           "description": "Small Icon for your App"
+        },
+        {
+          "key": "icon192",
+          "name": "Icon 192 x 192",
+          "type": "image",
+          "description": "Medium Icon for your App, for PWA loading"
+        },
+        {
+          "key": "icon512",
+          "name": "Icon 512 x 512",
+          "type": "image",
+          "description": "Large Icon for your App, for PWA loading"
         }
       ]
     }

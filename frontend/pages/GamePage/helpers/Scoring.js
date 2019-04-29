@@ -1,5 +1,6 @@
 // High score table stuff
-import { Request, Routes } from 'helpers/api';
+import Request from 'koji_utilities/request';
+import Routes from 'koji_utilities/routes';
 
 function getScores() {
     return new Promise((resolve, reject) => {

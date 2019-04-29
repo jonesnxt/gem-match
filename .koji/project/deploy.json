@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "subdomain": "candy.withkoji.com",
+    "subdomain": "newgems.withkoji.com",
     "frontend": {
       "output": "frontend/build",
       "commands": [

@@ -149,6 +149,9 @@ module.exports = {
       inject: true,
       template: './common/index.html',
     }),
+    new ExtraWatchWebpackPlugin({
+      dirs: [ '../.koji' ],
+    }),
     new WorkboxPlugin.GenerateSW(),
   ],
   resolve: {

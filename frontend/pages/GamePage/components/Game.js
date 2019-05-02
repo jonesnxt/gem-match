@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import GlobalContext from 'common/GlobalContext';
+import Koji from 'koji-tools';
 
 import Piece from './Piece';
 import Effect from './Effect';
@@ -52,14 +51,14 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.backgroundMusic = Sound.findAndLoop(this.context.sounds.backgroundMusic, this.props.muted);
-        this.swappingSound = Sound.find(this.context.sounds.swappingSound);
-        this.matchingSound = Sound.find(this.context.sounds.matchingSound);
+        this.backgroundMusic = Sound.findAndLoop(Koji.config.sounds.backgroundMusic, this.props.muted);
+        this.swappingSound = Sound.find(Koji.config.sounds.swappingSound);
+        this.matchingSound = Sound.find(Koji.config.sounds.matchingSound);
         Scoring.getScores();
         
         // calculate max size for blocks given screen size.
         this.setState({
-            blockSize: Util.getBlockSize(this.context.general.width, this.context.general.height),
+            blockSize: Util.getBlockSize(Koji.config.general.width, Koji.config.general.height),
         });
         
         this.newGame();
@@ -79,16 +78,16 @@ class Game extends React.Component {
         // make a new state of the game at the base start point
         let newBoard = [];
         const numTypes = Util.getNumTypes();
-        for(let i=0;i<this.context.general.width;i++) {
+        for(let i=0;i<Koji.config.general.width;i++) {
             newBoard.push([]);
-            for(let j=0;j<this.context.general.height;j++) {
+            for(let j=0;j<Koji.config.general.height;j++) {
                 newBoard[i].push(Util.newElement(numTypes));
             }
         }
 
         this.setState({
             board: newBoard,
-            moves: parseInt(this.context.general.moves),
+            moves: parseInt(Koji.config.general.moves),
             score: 0,
             multiplier: 1,
             gameOver: false,
@@ -111,7 +110,7 @@ class Game extends React.Component {
     checkMatches() {
         let newBoard = this.copy(this.state.board);
         
-        let found = Match.find(newBoard, this.context.general.width, this.context.general.height);
+        let found = Match.find(newBoard, Koji.config.general.width, Koji.config.general.height);
         if (found.length > 0) {
             // we have at least one match, deal with it.
 
@@ -126,13 +125,13 @@ class Game extends React.Component {
                 Sound.play(this.matchingSound, this.props.muted);
                 this.props.onFlash(Util.getColor(newBoard[found[0].x][found[0].y].type));
 
-                newBoard = Match.mark(newBoard, found, this.context.general.width, this.context.general.height);
+                newBoard = Match.mark(newBoard, found, Koji.config.general.width, Koji.config.general.height);
                 this.collectEffects(newBoard, found);
                 this.setState({ board: newBoard });
             }, () => {
                 // update dom
                 newBoard = this.copy(this.state.board);
-                newBoard = Match.sweep(newBoard, this.context.general.width, this.context.general.height);
+                newBoard = Match.sweep(newBoard, Koji.config.general.width, Koji.config.general.height);
                 // cleaned, reset state then lets run it again
                 this.setState({ board: newBoard, multiplier: this.state.multiplier + 1 });
             }, () => {
@@ -143,7 +142,7 @@ class Game extends React.Component {
             // we are done, commit..., and check game over
             setTimeout(() => {
                 this.setState({ busy: false, effects: [], gameOver: this.state.moves === 0 });
-            }, this.context.general.animationTime);
+            }, Koji.config.general.animationTime);
         }
     }
 
@@ -206,7 +205,7 @@ class Game extends React.Component {
                                 setTimeout(() => callback(), propagationDelay);
                             }, propagationDelay);
                         });
-                    }, this.context.general.animationLength);
+                    }, Koji.config.general.animationLength);
                 }, propagationDelay);
             });
         }, propagationDelay);
@@ -216,7 +215,7 @@ class Game extends React.Component {
         let effects = [];
         let newScore = this.state.score;
         marked.forEach((mark) => {
-            let amount = this.context.general.baseScore * this.state.multiplier;
+            let amount = Koji.config.general.baseScore * this.state.multiplier;
             let color = Util.getColor(newBoard[mark.x][mark.y].type);
             effects.push({ x: mark.x, y: mark.y, amount, color });
             newScore += amount; 
@@ -258,8 +257,8 @@ class Game extends React.Component {
 
 	render() {
 		return (
-            <Container width={this.context.general.width * this.state.blockSize}>
-                <Pieces width={this.context.general.width * this.state.blockSize} height={this.context.general.height * this.state.blockSize}>
+            <Container width={Koji.config.general.width * this.state.blockSize}>
+                <Pieces width={Koji.config.general.width * this.state.blockSize} height={Koji.config.general.height * this.state.blockSize}>
                     {this.state.board.map((row, x) => row.map((e, y) => (
                         <Piece
                             key={`(${x},${y})`}
@@ -273,7 +272,7 @@ class Game extends React.Component {
                             x={x}
                             y={y}
                             size={this.state.blockSize}
-                            height={this.context.general.height}
+                            height={Koji.config.general.height}
                             animate={this.state.animate}
                             color={Util.getColor(e.type)}
                             image={Util.getImage(e.type)}
@@ -307,7 +306,5 @@ class Game extends React.Component {
         );
 	}
 }
-
-Game.contextType = GlobalContext;
 
 export default Game;

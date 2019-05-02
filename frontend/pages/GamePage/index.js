@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { ThemeProvider, keyframes } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
-import GlobalContext from 'common/GlobalContext';
+import Koji from 'koji-tools';
 
 import Game from './components/Game';
 
@@ -11,7 +11,7 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
     height: 100vh;
-    background: url(${({ theme }) => theme.general.backgroundImage});
+    background: url(${() => Koji.config.general.backgroundImage});
     background-size: cover;
     background-position: center;
     flex-direction: column;
@@ -42,9 +42,9 @@ const Content = styled.div`
     height: 100vh;
     opacity: 1;
     z-index: 1;
-    color: ${({ theme }) => theme.style.textColor};
+    color: ${() => Koji.config.style.textColor};
     text-shadow: 0 1px 6px rgba(0,0,0,0.7);
-    font-family: '${({ theme }) => getFontFamily(theme.general.fontFamily)}', sans-serif;
+    font-family: '${() => getFontFamily(Koji.config.general.fontFamily)}', sans-serif;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -91,8 +91,8 @@ const Start = styled.button`
     max-width: 320px;
     font-size: 24px;
     background: rgba(0,0,0,0.7);
-    border: 4px solid ${({ theme }) => theme.style.textColor};
-    color: ${({ theme }) => theme.style.textColor};
+    border: 4px solid ${() => Koji.config.style.textColor};
+    color: ${() => Koji.config.style.textColor};
     box-shadow: 0 2px 12px rgba(0,0,0,0.24);
     text-shadow: 0 1px 6px rgba(0,0,0,0.4);
     cursor: pointer;
@@ -119,22 +119,28 @@ class HomePage extends React.Component {
         };
     }
 
-  flash(color) {
-    this.setState({ color, colorSwitch: true });
-    setTimeout(() => this.setState({ colorSwitch: false }), 700);
-  }
+    componentDidMount() {
+        Koji.on('change', () => {
+            this.forceUpdate();
+        })
+    }
 
-  toggleMute(muted) {
-      this.setState({ muted });
-      localStorage.setItem('muted', muted);
-  }
+    flash(color) {
+        this.setState({ color, colorSwitch: true });
+        setTimeout(() => this.setState({ colorSwitch: false }), 700);
+    }
+
+    toggleMute(muted) {
+        this.setState({ muted });
+        localStorage.setItem('muted', muted);
+    }
 
   render() {
     return (
         <Container color={this.state.color}>
-            <Helmet defaultTitle={this.context.general.name}>
-                <link href={this.context.general.fontFamily} rel="stylesheet" />
-                <link rel="icon" href={this.context.metadata.icon} sizes="32x32" />
+            <Helmet defaultTitle={Koji.config.general.name}>
+                <link href={Koji.config.general.fontFamily} rel="stylesheet" />
+                <link rel="icon" href={Koji.config.metadata.icon} sizes="32x32" />
             </Helmet>
             <Cover color={this.state.color} colorSwitch={this.state.colorSwitch} />
             <Content>
@@ -144,18 +150,16 @@ class HomePage extends React.Component {
                       : <FaVolumeUp onClick={() => this.toggleMute(true)} />
                     }
                 </VolumeControl>
-                <Title>{this.context.general.name}</Title>
+                <Title>{Koji.config.general.name}</Title>
                 {this.state.start ? (
                     <Game onFlash={(color) => this.flash(color)} muted={this.state.muted} />
                 ) : (
-                    <Start onClick={() => this.setState({ start: true })}>{this.context.general.buttonText}</Start>
+                    <Start onClick={() => this.setState({ start: true })}>{Koji.config.general.buttonText}</Start>
                 )}
             </Content>
         </Container>
     );
   }
 }
-
-HomePage.contextType = GlobalContext;
 
 export default HomePage;

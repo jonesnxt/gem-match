@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Koji from 'koji-tools';
 
 const Piece = styled.div.attrs((props) => ({
     style: {
@@ -13,7 +14,7 @@ const Piece = styled.div.attrs((props) => ({
         `,        
     },
 }))`
-    ${(props) => props.animate && `transition: transform ${props.theme.general.animationLength / 1000}s ease-in-out`};
+    ${(props) => props.animate && `transition: transform ${Koji.config.general.animationLength / 1000}s ease-in-out`};
     width: ${({ size }) => size}px;
     height: ${({ size }) => size}px;
     margin: 3px;

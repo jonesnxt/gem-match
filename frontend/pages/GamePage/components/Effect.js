@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import Koji from 'koji-tools';
 
 const pow = keyframes`
     0% {
@@ -21,7 +22,7 @@ const pow = keyframes`
 `;
 
 const Effect = styled.div`
-    animation: ${pow} ${({ theme }) => theme.general.animationLength / 1000}s ease-in-out;
+    animation: ${pow} ${() => Koji.config.general.animationLength / 1000}s ease-in-out;
     opacity: 0;
     position: absolute;
     top: ${(props) => (props.y * props.size)}px;

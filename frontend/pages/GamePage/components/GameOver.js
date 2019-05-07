@@ -49,7 +49,7 @@ const Score = styled.div`
     font-size: 20px;
     color: ${() => Koji.config.style.textColor};
     ${(props) => props.me && `
-        color: ${props.theme.style.primaryColor};
+        color: ${Koji.config.style.primaryColor};
         font-weight: bold;
     `}
 `;
